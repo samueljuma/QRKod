@@ -2,6 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Storage permissions for QR code download functionality -->
+    <!-- WRITE_EXTERNAL_STORAGE: Required for API 23-28 to save files to external storage -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    
+    <!-- READ_EXTERNAL_STORAGE: Required for API 23-32 to read files from external storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    
+    <!-- READ_MEDIA_IMAGES: Required for API 33+ to read images from MediaStore -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
     <application
         android:name=".QRCodeGenApplication"
         android:allowBackup="true"

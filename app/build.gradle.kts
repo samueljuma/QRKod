@@ -57,6 +57,15 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+    
+    // Testing dependencies
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.mockito:mockito-core:5.7.0")
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation(libs.koin.test)
+    
     //qr code
     implementation (libs.zxing.core)
 

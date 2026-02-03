@@ -2,8 +2,6 @@ package com.phillqins.qrcodegenerator
 
 import android.graphics.Bitmap
 import android.graphics.Color
-import androidx.core.graphics.createBitmap
-import androidx.core.graphics.set
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.QRCodeWriter
