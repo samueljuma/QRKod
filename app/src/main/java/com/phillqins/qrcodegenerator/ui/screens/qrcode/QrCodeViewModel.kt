@@ -6,7 +6,9 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.phillqins.qrcodegenerator.domain.model.DownloadError
+import com.phillqins.qrcodegenerator.domain.model.ShareError
 import com.phillqins.qrcodegenerator.domain.usecase.DownloadQRCodeUseCase
+import com.phillqins.qrcodegenerator.domain.usecase.ShareQRCodeUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -14,7 +16,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class QrCodeViewModel(
-    private val downloadQRCodeUseCase: DownloadQRCodeUseCase
+    private val downloadQRCodeUseCase: DownloadQRCodeUseCase,
+    private val shareQRCodeUseCase: ShareQRCodeUseCase
 ): ViewModel() {
     private val _state = MutableStateFlow(QRUiState())
     val state = _state.asStateFlow()
@@ -36,7 +39,7 @@ class QrCodeViewModel(
                 handleDownloadClick()
             }
             QRAction.OnShareClick -> {
-
+                handleShareClick()
             }
             QRAction.OnDismissDownloadMessage -> {
                 clearDownloadState()
@@ -99,6 +102,63 @@ class QrCodeViewModel(
                 updateDownloadState(
                     downloadState = DownloadState.Error,
                     message = "Unexpected error occurred during download: ${e.message}"
+                )
+            }
+        }
+    }
+
+    /**
+     * Handles the share button click action.
+     * Initiates the QR code share process if a bitmap is available.
+     */
+    private fun handleShareClick() {
+        val currentBitmap = _state.value.currentBitmap
+        
+        if (currentBitmap == null) {
+            updateDownloadState(
+                downloadState = DownloadState.Error,
+                message = "No QR code available to share. Please generate a QR code first."
+            )
+            return
+        }
+        
+        // Start share process
+        updateDownloadState(
+            downloadState = DownloadState.InProgress,
+            message = "Preparing QR code for sharing..."
+        )
+        
+        viewModelScope.launch {
+            try {
+                val result = shareQRCodeUseCase.execute(currentBitmap)
+                
+                if (result.success) {
+                    updateDownloadState(
+                        downloadState = DownloadState.Success,
+                        message = "QR code shared successfully!"
+                    )
+                } else {
+                    val errorMessage = when (result.error) {
+                        is ShareError.NoSharingAppsAvailable -> 
+                            "No sharing apps available. Please install a messaging or social media app."
+                        is ShareError.TempFileCreationFailed -> 
+                            "Unable to prepare QR code for sharing. Please try again."
+                        is ShareError.UserCancelled -> 
+                            "Share cancelled by user."
+                        is ShareError.UnknownError -> 
+                            "Share failed: ${result.error.message}"
+                        null -> "Share failed due to an unknown error."
+                    }
+                    
+                    updateDownloadState(
+                        downloadState = DownloadState.Error,
+                        message = errorMessage
+                    )
+                }
+            } catch (e: Exception) {
+                updateDownloadState(
+                    downloadState = DownloadState.Error,
+                    message = "Unexpected error occurred during share: ${e.message}"
                 )
             }
         }

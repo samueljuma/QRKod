@@ -151,9 +151,23 @@ fun DownloadShareBtns(
         TextButton(
             onClick = onShareClick,
             shape = RoundedCornerShape(10.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.primary),
+            enabled = downloadState != DownloadState.InProgress
         ) {
-            Text(text = "Share")
+            if (downloadState == DownloadState.InProgress) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(16.dp),
+                    strokeWidth = 2.dp,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
+            Text(
+                text = when (downloadState) {
+                    DownloadState.InProgress -> "Sharing..."
+                    else -> "Share"
+                }
+            )
         }
 
     }

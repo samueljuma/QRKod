@@ -1,11 +1,12 @@
-# QR Code Download Feature - Domain Layer
+# QR Code Download & Share Feature - Domain Layer
 
-This directory contains the core domain models, interfaces, and use cases for the QR code download feature.
+This directory contains the core domain models, interfaces, and use cases for the QR code download and share features.
 
 ## Structure
 
 ### Models (`domain/model/`)
 - **DownloadResult**: Result of a download operation with success status, file path, and error information
+- **ShareResult**: Result of a share operation with success status and error information
 - **StorageResult**: Result of a storage operation with URI, file path, and error details
 - **PermissionResult**: Result of permission requests with granted status and rationale information
 - **QRDownloadContext**: Context information for download operations including bitmap and metadata
@@ -13,10 +14,12 @@ This directory contains the core domain models, interfaces, and use cases for th
 
 ### Repositories/Services (`domain/repository/`)
 - **StorageService**: Interface for platform-specific storage operations with API level compatibility
+- **ShareService**: Interface for QR code sharing through Android's share intent system
 - **PermissionHandler**: Interface for managing Android storage permissions across different API levels
 
 ### Use Cases (`domain/usecase/`)
 - **DownloadQRCodeUseCase**: Primary business logic interface for orchestrating QR code download operations
+- **ShareQRCodeUseCase**: Business logic interface for orchestrating QR code share operations
 
 ## Error Handling
 
@@ -26,6 +29,12 @@ The domain layer defines comprehensive error handling through sealed classes:
 - `PermissionDenied`: Storage permission was denied
 - `InsufficientStorage`: Not enough storage space available
 - `FileSystemError`: General file system error
+- `UnknownError`: Unexpected error with descriptive message
+
+### ShareError
+- `NoSharingAppsAvailable`: No apps available to handle share intent
+- `TempFileCreationFailed`: Failed to create temporary file for sharing
+- `UserCancelled`: User cancelled the share operation
 - `UnknownError`: Unexpected error with descriptive message
 
 ### StorageError
@@ -50,3 +59,4 @@ This implementation addresses the following requirements:
 - **1.1-1.5**: Core download functionality with proper error handling
 - **2.1-2.5**: Permission management across API levels
 - **5.1-5.5**: File management and storage operations
+- **Share Feature**: QR code sharing through Android's share intent system with temporary file management
