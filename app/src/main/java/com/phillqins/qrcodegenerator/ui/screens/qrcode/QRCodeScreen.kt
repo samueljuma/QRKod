@@ -33,9 +33,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.phillqins.qrcodegenerator.R
 import com.phillqins.qrcodegenerator.generateQRCode
 import com.phillqins.qrcodegenerator.ui.screens.components.QRGenTextField
 import com.phillqins.qrcodegenerator.ui.theme.QRCodeGeneratorTheme
@@ -64,13 +66,18 @@ fun QRCodeScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "QR Code Generator")
+        Image(
+            painter = painterResource(id = R.drawable.qrkod),
+            contentDescription = "QR Code Icon",
+            modifier = Modifier.size(60.dp)
+                .align(Alignment.CenterHorizontally)
+        )
         QRGenTextField(
             state = state.qrContentState,
             hint = "Enter text to generate QR code",
         )
         QRCodeSection(
-            size = 600,
+            qrCodeSize = 600,
             qrString = state.qrContentState.text.toString(),
             modifier = Modifier.align(Alignment.CenterHorizontally),
             content = {
@@ -115,7 +122,7 @@ fun DownloadShareBtns(
 @Composable
 fun QRCodeSection(
     qrString: String,
-    size: Int = 200,
+    qrCodeSize: Int = 200,
     modifier: Modifier,
     content: (@Composable () -> Unit)? = null
 ) {
@@ -127,11 +134,11 @@ fun QRCodeSection(
         debouncedContent = qrString
     }
 
-    LaunchedEffect(debouncedContent, size) {
+    LaunchedEffect(debouncedContent, qrCodeSize) {
         val safeContent = debouncedContent.trim()
 
         qrCodeBitmap = if (safeContent.isNotEmpty()) {
-            generateQRCode(safeContent, size)
+            generateQRCode(safeContent, qrCodeSize)
         } else {
             null
         }
