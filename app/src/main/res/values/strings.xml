@@ -7,4 +7,5 @@
     <string name="onboarding_text_3">Download your QR codes to your device or share them directly via WhatsApp, SMS, email, and other apps in just a tap.</string>
     <string name="onboarding_title_3">Save and Share Easily</string>
     <string name="continue_button">Continue</string>
+    <string name="welcome_text">"👋 Hello today, "</string>
 </resources>

@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
@@ -71,10 +73,19 @@ private fun OnboardingScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .statusBarsPadding(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        Text(
+            modifier = Modifier.align(Alignment.Start),
+            text = stringResource(R.string.welcome_text),
+            style = TextStyle.Default.copy(
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
         Spacer(modifier = Modifier.weight(0.4f))
 
         Image(
