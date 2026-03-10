@@ -19,12 +19,7 @@ import kotlinx.coroutines.withContext
  * 2. Generate unique filenames if not provided
  * 3. Save the QR code bitmap to device storage
  * 4. Handle comprehensive error scenarios with appropriate recovery strategies
- * 
- * The implementation follows the requirements for:
- * - Permission management across different Android API levels (Requirements 2.1, 2.2, 2.5)
- * - Comprehensive error handling and user feedback (Requirements 1.2, 1.3, 3.3, 3.4, 3.5)
- * - File storage with unique naming (Requirements 1.1, 1.4, 5.1, 5.5)
- * - MVVM architecture integration (Requirements 4.1)
+ *
  */
 class DownloadQRCodeUseCaseImpl(
     private val storageService: StorageService,
@@ -86,8 +81,7 @@ class DownloadQRCodeUseCaseImpl(
 
     /**
      * Handles permission checking and requesting based on the current API level.
-     * 
-     * This method implements the permission flow consistency requirement (2.4):
+     *
      * - For API 29+: No permissions needed (scoped storage)
      * - For API 23-28: Check and request WRITE_EXTERNAL_STORAGE if needed
      * - For API 21-22: No runtime permissions required
@@ -130,7 +124,7 @@ class DownloadQRCodeUseCaseImpl(
     /**
      * Maps StorageResult to DownloadResult with appropriate error translation.
      * 
-     * This method implements comprehensive error handling (Requirements 1.3, 3.3, 3.4, 3.5)
+     * This method implements comprehensive error handling
      * by translating storage-specific errors to user-friendly download errors.
      * 
      * @param storageResult The result from the storage operation

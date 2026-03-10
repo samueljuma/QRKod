@@ -65,9 +65,8 @@ class PermissionHandlerImpl(
             Build.VERSION.SDK_INT >= API_LEVEL_SCOPED_STORAGE -> false
             
             // API 23-28 may need permission request if not already granted
-            Build.VERSION.SDK_INT >= API_LEVEL_RUNTIME_PERMISSIONS -> {
-                !hasStoragePermission()
-            }
+            Build.VERSION.SDK_INT >= API_LEVEL_RUNTIME_PERMISSIONS -> !hasStoragePermission()
+
             
             // API 21-22 doesn't require runtime permissions
             else -> false

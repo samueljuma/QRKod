@@ -85,9 +85,10 @@ fun QRCodeScreen(
         Image(
             painter = painterResource(id = R.drawable.qrkod),
             contentDescription = "QR Code Icon",
-            modifier = Modifier.size(60.dp)
+            modifier = Modifier.size(70.dp)
                 .align(Alignment.CenterHorizontally)
         )
+
         QRGenTextField(
             state = state.qrContentState,
             hint = "Enter text to generate QR code",

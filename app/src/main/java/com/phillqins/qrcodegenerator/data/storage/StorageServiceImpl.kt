@@ -108,14 +108,12 @@ class StorageServiceImpl(
             }
 
             // Insert the image into MediaStore
-            val uri: Uri? = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-            
-            if (uri == null) {
-                return@withContext StorageResult(
-                    success = false,
-                    error = StorageError.FileWriteFailed
-                )
-            }
+            val uri: Uri =
+                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                    ?: return@withContext StorageResult(
+                        success = false,
+                        error = StorageError.FileWriteFailed
+                    )
 
             // Write the bitmap to the URI
             resolver.openOutputStream(uri)?.use { outputStream ->

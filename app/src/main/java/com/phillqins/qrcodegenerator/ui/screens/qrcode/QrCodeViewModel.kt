@@ -78,7 +78,8 @@ class QrCodeViewModel(
                 if (result.success) {
                     updateDownloadState(
                         downloadState = DownloadState.Success,
-                        message = "QR code saved successfully${result.filePath?.let { " to $it" } ?: ""}"
+//                        message = "QR code saved successfully${result.filePath?.let { " to $it" } ?: ""}"
+                        message = "QR code saved successfully"
                     )
                 } else {
                     val errorMessage = when (result.error) {
