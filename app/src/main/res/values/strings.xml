@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">QRKod</string>
+    <string name="onboarding_text_1">Turn text, websites, or social media links into QR codes instantly. QRKod makes it simple to generate QR codes for anything you want to share.</string>
+    <string name="onboarding_title_1">Create QR Codes in Seconds</string>
+    <string name="onboarding_text_2">Create QR codes for websites, LinkedIn, Twitter, and other social profiles. Perfect for sharing your contact details, portfolio, or online presence.</string>
+    <string name="onboarding_title_2">Share More Than Just Text</string>
+    <string name="onboarding_text_3">Download your QR codes to your device or share them directly via WhatsApp, SMS, email, and other apps in just a tap.</string>
+    <string name="onboarding_title_3">Save and Share Easily</string>
+    <string name="continue_button">Continue</string>
 </resources>

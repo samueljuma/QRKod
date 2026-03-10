@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.WindowCompat
+import com.phillqins.qrcodegenerator.ui.screens.navigation.AppNavigation
 import com.phillqins.qrcodegenerator.ui.screens.qrcode.QRCodeScreenRoot
 import com.phillqins.qrcodegenerator.ui.theme.QRCodeGeneratorTheme
 import org.koin.androidx.compose.koinViewModel
@@ -16,9 +17,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = true
         setContent {
             QRCodeGeneratorTheme {
-                QRCodeScreenRoot(
-                    viewModel = koinViewModel()
-                )
+                AppNavigation()
             }
         }
     }

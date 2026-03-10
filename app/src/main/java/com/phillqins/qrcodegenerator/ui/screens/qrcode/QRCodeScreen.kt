@@ -58,10 +58,11 @@ import com.phillqins.qrcodegenerator.generateQRCode
 import com.phillqins.qrcodegenerator.ui.screens.components.QRGenTextField
 import com.phillqins.qrcodegenerator.ui.theme.QRCodeGeneratorTheme
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun QRCodeScreenRoot(
-    viewModel: QrCodeViewModel
+    viewModel: QrCodeViewModel = koinViewModel()
 ){
     val state by viewModel.state.collectAsStateWithLifecycle()
     QRCodeScreen(

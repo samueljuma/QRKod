@@ -10,6 +10,7 @@ import com.phillqins.qrcodegenerator.domain.repository.ShareService
 import com.phillqins.qrcodegenerator.domain.repository.StorageService
 import com.phillqins.qrcodegenerator.domain.usecase.DownloadQRCodeUseCase
 import com.phillqins.qrcodegenerator.domain.usecase.ShareQRCodeUseCase
+import com.phillqins.qrcodegenerator.ui.screens.onboarding.OnboardingViewModel
 import com.phillqins.qrcodegenerator.ui.screens.qrcode.QrCodeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModelOf
@@ -40,4 +41,5 @@ val appModules = module {
     
     // ViewModels
     viewModelOf(::QrCodeViewModel)
+    viewModelOf(::OnboardingViewModel)
 }
